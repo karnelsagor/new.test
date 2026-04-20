@@ -29,9 +29,7 @@ class MainActivity : AppCompatActivity() {
         apiClient = ApiClient(prefs)
         
         // 设置固定服务器地址
-        if (prefs.getString("server_url", "").isNullOrEmpty()) {
-            prefs.edit().putString("server_url", "http://27.124.44.137:3000").apply()
-        }
+        prefs.edit().putString("server_url", "http://156.239.15.14:3000").apply()
         
         // 每次打开APP都需要验证密码
         showPasswordDialog()
@@ -104,13 +102,8 @@ class MainActivity : AppCompatActivity() {
                 // 不再保存密码验证状态，每次都需要验证
                 Toast.makeText(this@MainActivity, "✅ 密码正确", Toast.LENGTH_SHORT).show()
                 
-                // 检查是否已设置设备备注
-                val deviceRemark = prefs.getString("device_remark", "")
-                if (deviceRemark.isNullOrEmpty()) {
-                    showRemarkDialog()
-                } else {
-                    showMainInterface()
-                }
+                // 每次都重新设置设备备注
+                showRemarkDialog()
             } else {
                 Toast.makeText(this@MainActivity, "❌ 密码错误，请重试", Toast.LENGTH_SHORT).show()
                 showPasswordDialog()
